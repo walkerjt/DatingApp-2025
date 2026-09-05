@@ -16,23 +16,23 @@ import { preventUnsavedChangesGuard } from '../core/guards/prevent-unsaved-chang
 
 export const routes: Routes = [
     { path: '', component: Home },
-    {
-        path: '',
+    { path: '',
         runGuardsAndResolvers: 'always',
         canActivate: [authGuard],
         children: [
             { path: 'members', component: MemberList },
-            { 
-                path: 'members/:id',
-                resolve: {member: memberResolver},
+            { path: 'members/:id',
+                resolve: { member: memberResolver },
                 runGuardsAndResolvers: 'always',
                 component: MemberDetailed,
                 children: [
-                    {path: '', redirectTo: 'profile', pathMatch: 'full'},
-                    {path: 'profile', component: MemberProfile, title: 'Profile',
-                        canDeactivate: [preventUnsavedChangesGuard]},
-                    {path: 'photos', component: MemberPhotos, title: 'Photos'},
-                    {path: 'messages', component: MemberMessages, title: 'Messages'}
+                    { path: '', redirectTo: 'profile', pathMatch: 'full' },
+                    {
+                        path: 'profile', component: MemberProfile, title: 'Profile',
+                        canDeactivate: [preventUnsavedChangesGuard]
+                    },
+                    { path: 'photos', component: MemberPhotos, title: 'Photos' },
+                    { path: 'messages', component: MemberMessages, title: 'Messages' }
                 ]
             },
             { path: 'lists', component: Lists },
